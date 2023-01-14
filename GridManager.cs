@@ -43,6 +43,7 @@ public class GridManager : MonoBehaviour
         int TempLimit = _x + _radius;
         int TempTarget = _x + _radius;
         int Tempradius = _radius + _y;
+        int TempradiusB = ((-1* _radius) + _y);
 
 
         //Create Rectangle
@@ -107,7 +108,7 @@ public class GridManager : MonoBehaviour
         //Create Diamond
         if( _shape == MyEnum.Orthagonal)
         {
-            while (TempY >= (-1 * Tempradius))
+            while (TempY >= TempradiusB)
             {
             
                 for (int x = TempLimit; x <= TempTarget; x++)
@@ -117,11 +118,20 @@ public class GridManager : MonoBehaviour
                         var spawnedTile = Instantiate (_tileprefab, new Vector3 (x, y), Quaternion.identity);
                         spawnedTile.name = $"Test {x} {y}";
                     }
-
                 }
-                TempLimit--;
-                TempTarget++;
+                if (TempY > (_y))
+                {
+                    TempLimit--;
+                    TempTarget++;
+                }
+                else
+                {
+                    TempLimit++;
+                    TempTarget--;
+                }
+                TempradiusB--;
                 Tempradius--;
+                
             }
         }
     }
